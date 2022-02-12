@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sei lá cara</title>
+    <title>Clique no Verde</title>
 </head>
 <body>
     <style>
@@ -25,38 +25,59 @@
         }
         #x,#num{
             width: 200px;
-            line-height: 200px;
+            line-height: 100px;
             text-align: center;
             color: white;
-            height: 200px; 
+            height: 100px; 
             background: #6495ed;
            
         }
         #x{
             margin-right: 200px;
             font-size: 40px;
+            
         }
-        #area,#xc,#x,#num{
+        #area,#x{
             display: inline-block;
         }
         #num{
             background: rgb(223, 188, 102);
             color: darkred;
             font-size: 60px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 60px;
         }
         #xc{
             margin-left: 30px;
+            margin-top: 50px;
             
         }
+        #rec{
+            margin-top: 30px;
+            margin-left: 30px;
+            width: 200px;
+            display: inline-block;
+            height: 100px;
+            background: rgb(201, 114, 33);
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            line-height: 100px;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
     </style>
+    <div id="num">20</div>
     <button id="area">
     </button>
     <div id='x'></div><br>
-    <div id="num">20</div>
         <button id="xc" style="background: rgb(255, 230, 0); width: 100px; height: 100px;"></button>
+    <div id="rec"></div>
 
     <script>
         var bhu = 0;
+        var nr =0;
+        var rec = document.getElementById('rec');
         var bu = document.getElementById('xc');
         var a = document.getElementById('area');
         var s=0;
@@ -83,36 +104,11 @@
         function sair(){
             a.style.background='chocolate'
         }*/
-        var colors = ["green", "red"];//Array com as cores, pode adicionar contas quiser
-var i = 0;
-var ip = 20;
-var mj = setInterval(function(){
-  a.style.background = colors[i];//A div deve ter um id, não funciona com class
-  i = (i == (colors.length -1)) ? 0 : i+1;
-  if(a.style.background=='red'){
-      a.innerText='Não clique!';
-  }else{
-      a.innerText="Clique!";
-  }
-},700);//40 Segundos em Milisegundos
-    var w = document.getElementById('w');
-    
-    var timer = setInterval(function(){
-        ip-=1;
-        var numero = document.getElementById('num');
-        numero.innerText = ip.toString();
-        var ip2 = ip.toString();
-        if(ip2=="0"){
-            clearInterval(mj);
-            clearInterval(timer);
-            a.disabled = true;
-
-        }
-    },1000)
     /*Botão*/
     bu.addEventListener('click',but);
-    bu.innerText="Reiniciar";
+    bu.innerText="Iniciar";
         function but(){
+            xc.disabled = true;
             a.disabled = false;
                 s =0;
                 x.innerText="Placar: "+s.toString();
@@ -139,6 +135,12 @@ var mj = setInterval(function(){
             clearInterval(mj);
             clearInterval(timer);
             a.disabled = true;
+            xc.disabled = false;
+            xc.innerText = "Reiniciar";
+            if(s>nr){
+                nr = s;
+                rec.innerText="Melhor Pontuação: " + nr;
+            }
 
         }
     },1000)
