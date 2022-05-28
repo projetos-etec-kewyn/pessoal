@@ -8,12 +8,15 @@
 </head>
 <body>
     <style>
+        body{
+            background-color: gray;
+        }
         #area{
-            font: normal 20pt Arial;
+            font: normal 12pt Arial;
             background: green;
-            width: 200px;
-            height: 200px;
-            line-height: 200px;
+            width: 30%;
+            height: 20%;
+            line-height: 100px;
             text-align: center;
             color: white;
             -webkit-touch-callout: none;
@@ -33,7 +36,6 @@
            
         }
         #x{
-            margin-right: 200px;
             font-size: 40px;
             
         }
@@ -41,12 +43,15 @@
             display: inline-block;
         }
         #num{
-            background: rgb(223, 188, 102);
+            background: gray;
             color: darkred;
-            font-size: 60px;
+            font-size: 40px;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 60px;
+            height: 70px;
+            width: 80px;
+            text-align: center;
         }
         #xc{
             margin-left: 30px;
@@ -58,23 +63,54 @@
             margin-left: 30px;
             width: 200px;
             display: inline-block;
-            height: 100px;
-            background: rgb(201, 114, 33);
-            color: rgb(0, 0, 0);
+            height: 80px;
+            color: rgb(255, 255, 255);
             font-size: 20px;
             line-height: 100px;
             font-family: Arial, Helvetica, sans-serif;
 
         }
+        #xc,#rec{
+            display: block;
+            margin: auto;
+        }
+        .container{
+            width: 100vw;
+            height: 100vh;
+            align-items: center;
+        }
+        h1{
+            font-size: 20px;
+            text-align: center;
+        }
     </style>
-    <div id="num">20</div>
-    <button id="area">
-    </button>
-    <div id='x'></div><br>
-        <button id="xc" style="background: rgb(255, 230, 0); width: 100px; height: 100px;"></button>
-    <div id="rec"></div>
-
+    <h1>Clique no botão verde para ganhar 1 ponto, mas você perde 1 ponto se clicar no botão vermelho</h1>
+    <p style="color: white; font-size: 20px;">Dificuldade</p>
+    <select id="select" onchange="difi()">
+        <option value="1">Fácil</option>
+        <option value="2" selected>Médio</option>
+        <option value="3">Difícil</option>
+      </select>
+    <div id="rec"></div><br>
+    <div class="container">
+        <button id="xc" style="background: rgb(255, 230, 0); width: 100px; height: 90px;"></button>
+        <button id="area">
+        </button>
+        <div id='x'></div><br><br>
+        <div id="num">20</div>
+    </div>
     <script>
+        var tempo = 700;
+        var sele = document.getElementById('select');
+        function difi(){
+            if(sele.value == 1){
+                tempo = 1100;
+            }else if(sele.value == 2){
+                tempo = 700;
+            }else{
+                tempo = 600;
+            }
+        }
         var bhu = 0;
         var nr =0;
         var rec = document.getElementById('rec');
@@ -110,43 +146,41 @@
         function but(){
             xc.disabled = true;
             a.disabled = false;
-                s =0;
-                x.innerText="Placar: "+s.toString();
+            s = 0;
+            x.innerText="Placar: "+s.toString();
             var colors = ["green", "red"];//Array com as cores, pode adicionar contas quiser
-var i = 0;
-var ip = 20;
-var mj = setInterval(function(){
-  a.style.background = colors[i];//A div deve ter um id, não funciona com class
-  i = (i == (colors.length -1)) ? 0 : i+1;
-  if(a.style.background=='red'){
-      a.innerText='Não clique!';
-  }else{
-      a.innerText="Clique!";
-  }
-},700);//40 Segundos em Milisegundos
-    var w = document.getElementById('w');
-    
-    var timer = setInterval(function(){
-        ip-=1;
-        var numero = document.getElementById('num');
-        numero.innerText = ip.toString();
-        var ip2 = ip.toString();
-        if(ip2=="0"){
-            clearInterval(mj);
-            clearInterval(timer);
-            a.disabled = true;
-            xc.disabled = false;
-            xc.innerText = "Reiniciar";
-            if(s>nr){
-                nr = s;
-                rec.innerText="Melhor Pontuação: " + nr;
+            var i = 0;
+            var ip = 20;
+            var mj = setInterval(function(){
+            a.style.background = colors[i];//A div deve ter um id, não funciona com class
+            i = (i == (colors.length -1)) ? 0 : i+1;
+            if(a.style.background=='red'){
+                a.innerText='Não clique!';
+            }else{
+                a.innerText="Clique!";
             }
+            },tempo);//40 Segundos em Milisegundos
+                var w = document.getElementById('w');
+                var timer = setInterval(function(){
+                    ip-=1;
+                    var numero = document.getElementById('num');
+                    numero.innerText = ip.toString();
+                    var ip2 = ip.toString();
+                    if(ip2=="0"){
+                        clearInterval(mj);
+                        clearInterval(timer);
+                        a.disabled = true;
+                        xc.disabled = false;
+                        xc.innerText = "Reiniciar";
+                        if(s>nr){
+                            nr = s;
+                            rec.innerText="Melhor Pontuação: " + nr;
+                        }
 
-        }
-    },1000)
+                    }
+                },1000)
         }
     
     </script>
-    <img src="" alt="">
 </body>
 </html>
